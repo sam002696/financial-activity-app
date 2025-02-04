@@ -31,8 +31,8 @@ export class IncomeListComponent implements OnInit {
     if (confirm('Are you sure you want to delete this income record?')) {
       this.incomeService.deleteIncome(id).subscribe((res: IApiResponseIncome) => {
         if (res.status === 'success') {
-          alert(res.message);  // Show success message
-          this.incomeList = this.incomeList.filter(income => income.id !== id);  // Remove deleted income from the list
+          alert(res.message);
+          this.incomeList = this.incomeList.filter(income => income.id !== id);
         } else {
           alert('Error deleting income');
         }

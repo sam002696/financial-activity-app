@@ -1,19 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { MobileSidebarComponent } from './sidebar-layout/mobile-sidebar/mobile-sidebar.component';
+import { SidebarComponent } from "./sidebar-layout/sidebar/sidebar.component";
+import { HeaderComponent } from "./sidebar-layout/header/header.component";
 
 @Component({
   selector: 'app-layout',
-  imports: [RouterOutlet, RouterLink, CommonModule],
+  imports: [RouterOutlet, CommonModule, MobileSidebarComponent, SidebarComponent, HeaderComponent],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.css'
 })
 export class LayoutComponent {
-  // Variable to track the state of the menu
-  isSubMenuOpen = false;
-
-  // Method to toggle the state of the menu
-  toggleMenu() {
-    this.isSubMenuOpen = !this.isSubMenuOpen;
-  }
 }
