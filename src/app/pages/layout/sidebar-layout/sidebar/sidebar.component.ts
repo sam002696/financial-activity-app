@@ -12,9 +12,14 @@ export class SidebarComponent {
   constructor(private router: Router) { }
 
   isSubMenuOpen: boolean = true;
+  isSubMenuExpenseOpen: boolean = true;
 
   toggleMenu(): void {
     this.isSubMenuOpen = !this.isSubMenuOpen;
+  }
+
+  toggleExpenseMenu(): void {
+    this.isSubMenuExpenseOpen = !this.isSubMenuExpenseOpen;
   }
 
 

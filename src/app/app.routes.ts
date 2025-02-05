@@ -4,8 +4,12 @@ import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AddIncomeComponent } from './pages/income/add-income/add-income.component';
 import { IncomeListComponent } from './pages/income/income-list/income-list.component';
-import { IncomeLayoutComponent } from './pages/layout/income-layout/income-layout/income-layout.component';
+import { IncomeLayoutComponent } from './pages/layout/activity-layout/income-layout/income-layout.component';
 import { EditIncomeComponent } from './pages/income/edit-income/edit-income.component';
+import { ExpenseLayoutComponent } from './pages/layout/activity-layout/expense-layout/expense-layout.component';
+import { ExpenseListComponent } from './pages/expense/expense-list/expense-list.component';
+import { AddExpenseComponent } from './pages/expense/add-expense/add-expense.component';
+import { EditExpenseComponent } from './pages/expense/edit-expense/edit-expense.component';
 
 export const routes: Routes = [
     {
@@ -40,6 +44,24 @@ export const routes: Routes = [
                     {
                         path: 'edit/:id',
                         component: EditIncomeComponent
+                    }
+                ]
+            },
+            {
+                path: 'expense',
+                component: ExpenseLayoutComponent,
+                children: [
+                    {
+                        path: 'list',
+                        component: ExpenseListComponent
+                    },
+                    {
+                        path: 'log',
+                        component: AddExpenseComponent
+                    },
+                    {
+                        path: 'edit/:id',
+                        component: EditExpenseComponent
                     }
                 ]
             }
