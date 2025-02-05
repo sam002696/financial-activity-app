@@ -1,18 +1,21 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, RouterLinkActive],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'
 })
 export class SidebarComponent {
-  // For toggling nested submenu(s) inside the sidebar (if needed)
-  isSubMenuOpen: boolean = false;
+  constructor(private router: Router) { }
+
+  isSubMenuOpen: boolean = true;
 
   toggleMenu(): void {
     this.isSubMenuOpen = !this.isSubMenuOpen;
   }
+
+
 }

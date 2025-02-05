@@ -3,7 +3,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { IncomeService } from '../../../services/income.service';
 import { IApiResponseIncome } from '../../../model/income/income';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-income-list',
@@ -12,6 +12,8 @@ import { RouterLink } from '@angular/router';
   styleUrl: './income-list.component.css'
 })
 export class IncomeListComponent implements OnInit {
+
+  constructor(private router: Router) { }
 
   incomeList: GetIncome[] = []
 
@@ -38,6 +40,13 @@ export class IncomeListComponent implements OnInit {
         }
       });
     }
+  }
+
+
+
+
+  handleIncome() {
+    this.router.navigate(['/income/log']);
   }
 
 
