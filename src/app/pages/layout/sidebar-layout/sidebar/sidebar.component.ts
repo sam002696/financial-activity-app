@@ -13,6 +13,7 @@ export class SidebarComponent {
 
   isSubMenuOpen: boolean = true;
   isSubMenuExpenseOpen: boolean = true;
+  isSubMenuLoanOpen: boolean = true;
 
   toggleMenu(): void {
     this.isSubMenuOpen = !this.isSubMenuOpen;
@@ -20,6 +21,10 @@ export class SidebarComponent {
 
   toggleExpenseMenu(): void {
     this.isSubMenuExpenseOpen = !this.isSubMenuExpenseOpen;
+  }
+
+  toggleLoanMenu(): void {
+    this.isSubMenuLoanOpen = !this.isSubMenuLoanOpen;
   }
 
 

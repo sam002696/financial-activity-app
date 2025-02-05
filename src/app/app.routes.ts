@@ -10,6 +10,10 @@ import { ExpenseLayoutComponent } from './pages/layout/activity-layout/expense-l
 import { ExpenseListComponent } from './pages/expense/expense-list/expense-list.component';
 import { AddExpenseComponent } from './pages/expense/add-expense/add-expense.component';
 import { EditExpenseComponent } from './pages/expense/edit-expense/edit-expense.component';
+import { LoanLayoutComponent } from './pages/layout/activity-layout/loan-layout/loan-layout.component';
+import { LoanListComponent } from './pages/loan/loan-list/loan-list.component';
+import { AddLoanComponent } from './pages/loan/add-loan/add-loan.component';
+import { EditLoanComponent } from './pages/loan/edit-loan/edit-loan.component';
 
 export const routes: Routes = [
     {
@@ -62,6 +66,24 @@ export const routes: Routes = [
                     {
                         path: 'edit/:id',
                         component: EditExpenseComponent
+                    }
+                ]
+            },
+            {
+                path: 'loan',
+                component: LoanLayoutComponent,
+                children: [
+                    {
+                        path: 'list',
+                        component: LoanListComponent
+                    },
+                    {
+                        path: 'log',
+                        component: AddLoanComponent
+                    },
+                    {
+                        path: 'edit/:id',
+                        component: EditLoanComponent
                     }
                 ]
             }
