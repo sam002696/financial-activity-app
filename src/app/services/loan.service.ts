@@ -17,8 +17,8 @@ export class LoanService {
     return this.http.post<IApiResponse>(url, obj);
   }
 
-  getLoanList(): Observable<IApiResponse> {
-    const url = this.urlBuilder.buildUrl('financial-activities/loan/list');
+  getLoanList(page: number = 1, size: number = 10): Observable<IApiResponse> {
+    const url = this.urlBuilder.buildUrl(`financial-activities/loan/list?page=${page}&size=${size}`);
     return this.http.get<IApiResponse>(url);
   }
 

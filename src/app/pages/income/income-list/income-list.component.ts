@@ -4,14 +4,17 @@ import { IncomeService } from '../../../services/income.service';
 import { IApiResponseIncome } from '../../../model/income/income';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
+import { PaginationComponent } from "../../pagination/pagination.component";
 
 @Component({
   selector: 'app-income-list',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, PaginationComponent],
   templateUrl: './income-list.component.html',
   styleUrl: './income-list.component.css'
 })
 export class IncomeListComponent implements OnInit {
+
+  meta: any = {};
 
   constructor(private router: Router) { }
 
@@ -20,13 +23,31 @@ export class IncomeListComponent implements OnInit {
   incomeService = inject(IncomeService);
 
   ngOnInit(): void {
-    this.incomeService.getIncomeList().subscribe((res: IApiResponseIncome) => {
-      console.log(res);
+    this.loadIncomes(1, 10);  // Default to page 1 and size 10 items per page
+  }
+
+  // Load loans with pagination
+  loadIncomes(page: number, size: number): void {
+    this.incomeService.getIncomeList(page, size).subscribe((res: IApiResponseIncome) => {
       if (res.status === 'success') {
         this.incomeList = res.data;
+        this.meta = res.meta;
+        // Calculate total pages if not provided by API
+        if (this.meta.total && this.meta.size) {
+          this.meta.totalPages = Math.ceil(this.meta.total / this.meta.size);
+        }
       }
     });
   }
+
+  // Handle page change from pagination component
+  onPageChange(page: number): void {
+    // Don't call loadLoans if the page is out of bounds (e.g., before page 1 or after totalPages)
+    if (page > 0 && page <= this.meta.totalPages) {
+      this.loadIncomes(page, this.meta.size);  // Fetch the loans for the selected page
+    }
+  }
+
 
   // Method to handle income deletion
   onDelete(id: number): void {

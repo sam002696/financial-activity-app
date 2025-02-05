@@ -4,10 +4,11 @@ import { Router, RouterLink } from '@angular/router';
 import { GetExpense } from '../../../model/expense/expense';
 import { ExpenseService } from '../../../services/expense.service';
 import { IApiResponse } from '../../../model/apiresponse/apiresponse';
+import { PaginationComponent } from "../../pagination/pagination.component";
 
 @Component({
   selector: 'app-expense-list',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, PaginationComponent],
   templateUrl: './expense-list.component.html',
   styleUrl: './expense-list.component.css'
 })
@@ -16,15 +17,43 @@ export class ExpenseListComponent implements OnInit {
 
   expenseList: GetExpense[] = []
 
+  meta: any = {};  // Store pagination metadata
+
   expenseService = inject(ExpenseService);
 
   ngOnInit(): void {
-    this.expenseService.getExpenseList().subscribe((res: IApiResponse) => {
-      console.log(res);
+    this.loadExpenses(1, 10);  // Default to page 1 and size 10 items per page
+  }
+
+  // Load loans with pagination
+  loadExpenses(page: number, size: number): void {
+    this.expenseService.getExpenseList(page, size).subscribe((res: IApiResponse) => {
       if (res.status === 'success') {
         this.expenseList = res.data;
+        this.meta = res.meta;
+        // Calculate total pages if not provided by API
+        if (this.meta.total && this.meta.size) {
+          this.meta.totalPages = Math.ceil(this.meta.total / this.meta.size);
+        }
       }
     });
+  }
+
+  // ngOnInit(): void {
+  //   this.expenseService.getExpenseList().subscribe((res: IApiResponse) => {
+  //     console.log(res);
+  //     if (res.status === 'success') {
+  //       this.expenseList = res.data;
+  //     }
+  //   });
+  // }
+
+  // Handle page change from pagination component
+  onPageChange(page: number): void {
+    // Don't call loadLoans if the page is out of bounds (e.g., before page 1 or after totalPages)
+    if (page > 0 && page <= this.meta.totalPages) {
+      this.loadExpenses(page, this.meta.size);  // Fetch the loans for the selected page
+    }
   }
 
   // Method to handle expense deletion

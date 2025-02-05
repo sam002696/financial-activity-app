@@ -16,8 +16,8 @@ export class IncomeService {
     return this.http.post<IApiResponseIncome>(url, obj);
   }
 
-  getIncomeList(): Observable<IApiResponseIncome> {
-    const url = this.urlBuilder.buildUrl('financial-activities/income/list');
+  getIncomeList(page: number = 1, size: number = 10): Observable<IApiResponseIncome> {
+    const url = this.urlBuilder.buildUrl(`financial-activities/income/list?page=${page}&size=${size}`);
     return this.http.get<IApiResponseIncome>(url);
   }
 

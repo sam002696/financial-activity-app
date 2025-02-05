@@ -17,8 +17,9 @@ export class ExpenseService {
     return this.http.post<IApiResponse>(url, obj);
   }
 
-  getExpenseList(): Observable<IApiResponse> {
-    const url = this.urlBuilder.buildUrl('financial-activities/expense/list');
+
+  getExpenseList(page: number = 1, size: number = 10): Observable<IApiResponse> {
+    const url = this.urlBuilder.buildUrl(`financial-activities/expense/list?page=${page}&size=${size}`);
     return this.http.get<IApiResponse>(url);
   }
 
