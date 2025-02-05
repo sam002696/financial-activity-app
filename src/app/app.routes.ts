@@ -14,6 +14,7 @@ import { LoanLayoutComponent } from './pages/layout/activity-layout/loan-layout/
 import { LoanListComponent } from './pages/loan/loan-list/loan-list.component';
 import { AddLoanComponent } from './pages/loan/add-loan/add-loan.component';
 import { EditLoanComponent } from './pages/loan/edit-loan/edit-loan.component';
+import { UserProfileComponent } from './pages/profile/user-profile/user-profile.component';
 
 export const routes: Routes = [
     {
@@ -86,7 +87,11 @@ export const routes: Routes = [
                         component: EditLoanComponent
                     }
                 ]
-            }
+            },
+            {
+                path: 'user-profile',
+                component: UserProfileComponent
+            },
         ]
     },
 ];
