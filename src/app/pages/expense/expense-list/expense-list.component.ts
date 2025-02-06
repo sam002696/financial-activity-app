@@ -5,19 +5,23 @@ import { GetExpense } from '../../../model/expense/expense';
 import { ExpenseService } from '../../../services/expense.service';
 import { IApiResponse } from '../../../model/apiresponse/apiresponse';
 import { PaginationComponent } from "../../pagination/pagination.component";
+import { ExpenseModalComponent } from "../../modal/expense-modal/expense-modal.component";
 
 @Component({
   selector: 'app-expense-list',
-  imports: [CommonModule, RouterLink, PaginationComponent],
+  imports: [CommonModule, RouterLink, PaginationComponent, ExpenseModalComponent],
   templateUrl: './expense-list.component.html',
   styleUrl: './expense-list.component.css'
 })
 export class ExpenseListComponent implements OnInit {
+
+  selectedExpenseId: number | null = null;
+
   constructor(private router: Router) { }
 
   expenseList: GetExpense[] = []
 
-  meta: any = {};  // Store pagination metadata
+  meta: any = {};  // Storing pagination metadata
 
   expenseService = inject(ExpenseService);
 
@@ -39,20 +43,12 @@ export class ExpenseListComponent implements OnInit {
     });
   }
 
-  // ngOnInit(): void {
-  //   this.expenseService.getExpenseList().subscribe((res: IApiResponse) => {
-  //     console.log(res);
-  //     if (res.status === 'success') {
-  //       this.expenseList = res.data;
-  //     }
-  //   });
-  // }
 
   // Handle page change from pagination component
   onPageChange(page: number): void {
-    // Don't call loadLoans if the page is out of bounds (e.g., before page 1 or after totalPages)
+
     if (page > 0 && page <= this.meta.totalPages) {
-      this.loadExpenses(page, this.meta.size);  // Fetch the loans for the selected page
+      this.loadExpenses(page, this.meta.size);
     }
   }
 
@@ -70,7 +66,13 @@ export class ExpenseListComponent implements OnInit {
     }
   }
 
+  onViewContract(incomeId: number) {
+    this.selectedExpenseId = incomeId;
+  }
 
+  closeModal() {
+    this.selectedExpenseId = null;
+  }
 
 
   handleAddExpense() {
