@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { UpdateUserProfile } from '../../../model/user/user';
 import { UserProfileService } from '../../../services/user-profile.service';
 import { IApiResponse } from '../../../model/apiresponse/apiresponse';
+import { GlobalAlertService } from '../../../services/global-alert.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -17,6 +18,7 @@ export class UserProfileComponent implements OnInit {
 
   constructor(
     private userProfileService: UserProfileService,
+    private globalAlertService: GlobalAlertService
   ) { }
 
   ngOnInit(): void {
@@ -39,10 +41,10 @@ export class UserProfileComponent implements OnInit {
 
     this.userProfileService.updateUserProfileInfo(updatedUserInfo).subscribe((res: IApiResponse) => {
       if (res.status === 'success') {
-        alert(res.message);
-      } else {
-        console.log('Error updating user profile');
+        this.globalAlertService.showAlert(res.message, 'success');
       }
+    }, error => {
+      this.globalAlertService.showAlert(error.error.message, 'error');
     });
   }
 

@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IApiResponse } from '../../../model/apiresponse/apiresponse';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { GlobalAlertService } from '../../../services/global-alert.service';
 
 @Component({
   selector: 'app-edit-loan',
@@ -19,7 +20,8 @@ export class EditLoanComponent implements OnInit {
   constructor(
     private loanService: LoanService,
     private route: ActivatedRoute, // to get the id from the route
-    private router: Router // for navigating after successful update
+    private router: Router, // for navigating after successful update
+    private globalAlertService: GlobalAlertService
   ) { }
 
   ngOnInit(): void {
@@ -51,11 +53,11 @@ export class EditLoanComponent implements OnInit {
 
     this.loanService.updateLoan(id, loanData).subscribe((res: IApiResponse) => {
       if (res.status === 'success') {
-        alert(res.message);
+        this.globalAlertService.showAlert(res.message, 'success');
         this.router.navigate(['/loan/list']);
-      } else {
-        console.log('Error updating loan');
       }
+    }, error => {
+      this.globalAlertService.showAlert(error.error.message, 'error');
     });
   }
 }

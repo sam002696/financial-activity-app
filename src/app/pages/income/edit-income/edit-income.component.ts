@@ -4,6 +4,7 @@ import { IncomeService } from '../../../services/income.service';
 import { IApiResponseIncome, addIncome } from '../../../model/income/income';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { GlobalAlertService } from '../../../services/global-alert.service';
 
 @Component({
   selector: 'app-edit-income',
@@ -19,7 +20,8 @@ export class EditIncomeComponent implements OnInit {
   constructor(
     private incomeService: IncomeService,
     private route: ActivatedRoute, // to get the id from the route
-    private router: Router // for navigating after successful update
+    private router: Router,// for navigating after successful update
+    private globalAlertService: GlobalAlertService
   ) { }
 
   ngOnInit(): void {
@@ -46,11 +48,12 @@ export class EditIncomeComponent implements OnInit {
 
     this.incomeService.updateIncome(id, incomeData).subscribe((res: IApiResponseIncome) => {
       if (res.status === 'success') {
-        alert(res.message);
+        this.globalAlertService.showAlert(res.message, 'success');
         this.router.navigate(['/income/list']);
-      } else {
-        console.log('Error updating income');
       }
+    }, error => {
+      this.globalAlertService.showAlert(error.error.message, 'error');
     });
+
   }
 }

@@ -5,6 +5,7 @@ import { addExpense } from '../../../model/expense/expense';
 import { ExpenseService } from '../../../services/expense.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IApiResponse } from '../../../model/apiresponse/apiresponse';
+import { GlobalAlertService } from '../../../services/global-alert.service';
 
 @Component({
   selector: 'app-edit-expense',
@@ -19,7 +20,8 @@ export class EditExpenseComponent implements OnInit {
   constructor(
     private expenseService: ExpenseService,
     private route: ActivatedRoute, // to get the id from the route
-    private router: Router // for navigating after successful update
+    private router: Router, // for navigating after successful update
+    private globalAlertService: GlobalAlertService
   ) { }
 
   ngOnInit(): void {
@@ -47,11 +49,11 @@ export class EditExpenseComponent implements OnInit {
 
     this.expenseService.updateExpense(id, expenseData).subscribe((res: IApiResponse) => {
       if (res.status === 'success') {
-        alert(res.message);
+        this.globalAlertService.showAlert(res.message, 'success');
         this.router.navigate(['/expense/list']);
-      } else {
-        console.log('Error updating expense');
       }
+    }, error => {
+      this.globalAlertService.showAlert(error.error.message, 'error');
     });
   }
 }
