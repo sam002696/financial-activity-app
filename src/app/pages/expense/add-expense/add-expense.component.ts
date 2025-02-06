@@ -4,10 +4,11 @@ import { Router } from '@angular/router';
 import { addExpense } from '../../../model/expense/expense';
 import { ExpenseService } from '../../../services/expense.service';
 import { IApiResponse } from '../../../model/apiresponse/apiresponse';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-add-expense',
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './add-expense.component.html',
   styleUrl: './add-expense.component.css'
 })

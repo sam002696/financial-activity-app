@@ -40,7 +40,4 @@ export class AddIncomeComponent {
     });
   }
 
-  showTestAlert() {
-    this.globalAlertService.showAlert('This is a test alert!', 'error');
-  }
 }

@@ -4,10 +4,11 @@ import { Router } from '@angular/router';
 import { LoanService } from '../../../services/loan.service';
 import { addLoan } from '../../../model/loan/loan';
 import { IApiResponse } from '../../../model/apiresponse/apiresponse';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-add-loan',
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './add-loan.component.html',
   styleUrl: './add-loan.component.css'
 })
