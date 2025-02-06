@@ -66,8 +66,8 @@ export class ExpenseListComponent implements OnInit {
     }
   }
 
-  onViewContract(incomeId: number) {
-    this.selectedExpenseId = incomeId;
+  onViewContract(expenseId: number) {
+    this.selectedExpenseId = expenseId;
   }
 
   closeModal() {

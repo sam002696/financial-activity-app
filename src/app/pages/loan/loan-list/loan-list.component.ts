@@ -5,15 +5,19 @@ import { LoanService } from '../../../services/loan.service';
 import { IApiResponse } from '../../../model/apiresponse/apiresponse';
 import { PaginationComponent } from "../../pagination/pagination.component";
 import { CommonModule } from '@angular/common';
+import { LoanModalComponent } from "../../modal/loan-modal/loan-modal.component";
 
 @Component({
   selector: 'app-loan-list',
-  imports: [CommonModule, PaginationComponent, RouterLink],
+  imports: [CommonModule, PaginationComponent, RouterLink, LoanModalComponent],
   templateUrl: './loan-list.component.html',
   styleUrls: ['./loan-list.component.css']
 })
 export class LoanListComponent implements OnInit {
+  selectedLoanId: number | null = null
+
   loanList: GetLoan[] = [];
+
   meta: any = {};  // Store pagination metadata
 
   loanService = inject(LoanService);
@@ -73,6 +77,15 @@ export class LoanListComponent implements OnInit {
         }
       });
     }
+  }
+
+
+  onViewContract(loanId: number) {
+    this.selectedLoanId = loanId;
+  }
+
+  closeModal() {
+    this.selectedLoanId = null;
   }
 
   handleAddLoan() {
