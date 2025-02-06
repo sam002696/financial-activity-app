@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { UserDashboard } from '../../model/user/dashboard';
+import { UserDashboardService } from '../../services/user-dashboard.service';
+import { IApiResponse } from '../../model/apiresponse/apiresponse';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,6 +9,26 @@ import { Component } from '@angular/core';
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
+
+  userDashboardData: UserDashboard | any = null;
+
+
+
+  constructor(
+    private userDashboardService: UserDashboardService,
+
+  ) { }
+
+  ngOnInit(): void {
+
+    this.userDashboardService.getDashboardData().subscribe((res: IApiResponse) => {
+      if (res.status === 'success') {
+        this.userDashboardData = res.data;
+      }
+    });
+
+  }
+
 
 }
