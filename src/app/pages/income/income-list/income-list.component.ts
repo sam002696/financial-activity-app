@@ -5,14 +5,17 @@ import { IApiResponseIncome } from '../../../model/income/income';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { PaginationComponent } from "../../pagination/pagination.component";
+import { IncomeModalComponent } from "../../modal/income-modal/income-modal.component";
 
 @Component({
   selector: 'app-income-list',
-  imports: [CommonModule, RouterLink, PaginationComponent],
+  imports: [CommonModule, RouterLink, PaginationComponent, IncomeModalComponent],
   templateUrl: './income-list.component.html',
   styleUrl: './income-list.component.css'
 })
 export class IncomeListComponent implements OnInit {
+
+  selectedIncomeId: number | null = null;
 
   meta: any = {};
 
@@ -64,12 +67,20 @@ export class IncomeListComponent implements OnInit {
   }
 
 
+  onViewContract(incomeId: number) {
+    this.selectedIncomeId = incomeId;
+  }
+
+
 
 
   handleIncome() {
     this.router.navigate(['/income/log']);
   }
 
-
+  // Close the modal
+  closeModal() {
+    this.selectedIncomeId = null;
+  }
 
 }
