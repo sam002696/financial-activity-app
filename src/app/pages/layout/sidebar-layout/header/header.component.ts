@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../../../model/user/user';
 import { UserProfileService } from '../../../../services/user-profile.service';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -12,7 +12,9 @@ import { RouterLink } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private userProfileService: UserProfileService) { }
+  constructor(private userProfileService: UserProfileService,
+    private router: Router,
+  ) { }
 
   user: User | null = null;
   isUserMenuOpen: boolean = false;
@@ -28,6 +30,11 @@ export class HeaderComponent implements OnInit {
     this.userProfileService.user$.subscribe(user => {
       this.user = user; // Automatically get updated user data
     });
+  }
+
+  onSignOut() {
+    localStorage.removeItem('user');
+    this.router.navigate(['/login'])
   }
 
 }

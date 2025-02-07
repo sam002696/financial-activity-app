@@ -16,6 +16,7 @@ import { AddLoanComponent } from './pages/loan/add-loan/add-loan.component';
 import { EditLoanComponent } from './pages/loan/edit-loan/edit-loan.component';
 import { UserProfileComponent } from './pages/profile/user-profile/user-profile.component';
 import { UserReportComponent } from './pages/report/user-report/user-report.component';
+import { SignupComponent } from './pages/signup/signup.component';
 
 export const routes: Routes = [
     {
@@ -26,6 +27,10 @@ export const routes: Routes = [
     {
         path: 'login',
         component: LoginComponent
+    },
+    {
+        path: 'signup',
+        component: SignupComponent
     },
     {
         path: '',

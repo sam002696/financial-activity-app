@@ -1,11 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { UserAuthService } from '../../services/user-auth.service';
+import { GlobalAlertService } from '../../services/global-alert.service';
+import { IApiResponse } from '../../model/apiresponse/apiresponse';
+import { UserProfileService } from '../../services/user-profile.service';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -18,16 +22,27 @@ export class LoginComponent {
 
   http = inject(HttpClient)
   router = inject(Router)
+  authService = inject(UserAuthService);
+  globalAlertService = inject(GlobalAlertService)
+  userProfileService = inject(UserProfileService);
+
 
   onLogin() {
-    this.http.post('http://localhost:9500/api/v1/auth/login', this.loginObj).subscribe((res: any) => {
-      console.log(res)
-      if (res.status == "success") {
-        alert(res.message)
+    console.log('Form Submitted', this.loginObj);
+
+    this.authService.login(this.loginObj).subscribe((res: IApiResponse) => {
+      console.log('Response', res);
+      if (res.status === 'success') {
         localStorage.setItem('user', JSON.stringify(res.data))
-        this.router.navigate(['/dashboard'])
+        this.userProfileService.setUser(res.data);
+        this.globalAlertService.showAlert(res.message, 'success');
+        this.router.navigate(['/dashboard']);
       }
-    })
+
+    }, error => {
+      this.globalAlertService.showAlert(error.error.message, 'error');
+    });
+
   }
 
 }

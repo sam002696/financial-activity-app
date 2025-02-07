@@ -50,4 +50,8 @@ export class UserProfileService {
     const url = this.urlBuilder.buildUrl('users/profile-info');
     return this.http.get<IApiResponse>(url);
   }
+
+  setUser(user: any) {
+    this.userSubject.next(user); // Update the current user data
+  }
 }
