@@ -17,6 +17,8 @@ import { EditLoanComponent } from './pages/loan/edit-loan/edit-loan.component';
 import { UserProfileComponent } from './pages/profile/user-profile/user-profile.component';
 import { UserReportComponent } from './pages/report/user-report/user-report.component';
 import { SignupComponent } from './pages/signup/signup.component';
+import { AuthenticationErrorComponent } from './pages/authentication-error/authentication-error.component';
+import { AuthGuard } from './auth/auth.guard';
 
 export const routes: Routes = [
     {
@@ -38,7 +40,8 @@ export const routes: Routes = [
         children: [
             {
                 path: 'dashboard',
-                component: DashboardComponent
+                component: DashboardComponent,
+                canActivate: [AuthGuard]
             },
             {
                 path: 'income',
@@ -46,15 +49,18 @@ export const routes: Routes = [
                 children: [
                     {
                         path: 'list',
-                        component: IncomeListComponent
+                        component: IncomeListComponent,
+                        canActivate: [AuthGuard]
                     },
                     {
                         path: 'log',
-                        component: AddIncomeComponent
+                        component: AddIncomeComponent,
+                        canActivate: [AuthGuard]
                     },
                     {
                         path: 'edit/:id',
-                        component: EditIncomeComponent
+                        component: EditIncomeComponent,
+                        canActivate: [AuthGuard]
                     }
                 ]
             },
@@ -64,15 +70,18 @@ export const routes: Routes = [
                 children: [
                     {
                         path: 'list',
-                        component: ExpenseListComponent
+                        component: ExpenseListComponent,
+                        canActivate: [AuthGuard]
                     },
                     {
                         path: 'log',
-                        component: AddExpenseComponent
+                        component: AddExpenseComponent,
+                        canActivate: [AuthGuard]
                     },
                     {
                         path: 'edit/:id',
-                        component: EditExpenseComponent
+                        component: EditExpenseComponent,
+                        canActivate: [AuthGuard]
                     }
                 ]
             },
@@ -82,26 +91,35 @@ export const routes: Routes = [
                 children: [
                     {
                         path: 'list',
-                        component: LoanListComponent
+                        component: LoanListComponent,
+                        canActivate: [AuthGuard]
                     },
                     {
                         path: 'log',
-                        component: AddLoanComponent
+                        component: AddLoanComponent,
+                        canActivate: [AuthGuard]
                     },
                     {
                         path: 'edit/:id',
-                        component: EditLoanComponent
+                        component: EditLoanComponent,
+                        canActivate: [AuthGuard]
                     }
                 ]
             },
             {
                 path: 'reports',
-                component: UserReportComponent
+                component: UserReportComponent,
+                canActivate: [AuthGuard]
             },
             {
                 path: 'user-profile',
-                component: UserProfileComponent
+                component: UserProfileComponent,
+                canActivate: [AuthGuard]
             },
         ]
     },
+    {
+        path: 'error',
+        component: AuthenticationErrorComponent
+    }
 ];

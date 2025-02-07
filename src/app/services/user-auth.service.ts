@@ -24,6 +24,14 @@ export class UserAuthService {
     return this.http.post<IApiResponse>(url, obj);
   }
 
+  isAuthenticated(): boolean {
+    // Logic to check if the user is authenticated (e.g., check token in localStorage)
+    // accessToken
+    const user = localStorage.getItem('user');
+    const token = user ? JSON.parse(user).accessToken : null;
+    return !!token;  // Returns true if token exists
+  }
+
 
 
 }
