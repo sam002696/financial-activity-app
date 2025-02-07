@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../../../../model/user/user';
 import { UserProfileService } from '../../../../services/user-profile.service';
 import { Router, RouterLink } from '@angular/router';
+import { Notification } from '../../../../model/user/notfication';
+import { UserNotificationService } from '../../../../services/user-notification.service';
 
 @Component({
   selector: 'app-header',
@@ -12,8 +14,12 @@ import { Router, RouterLink } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
+  notifications: Notification[] = [];
+  dropdownOpen = false;
+
   constructor(private userProfileService: UserProfileService,
     private router: Router,
+    private notificationService: UserNotificationService
   ) { }
 
   user: User | null = null;
@@ -26,10 +32,39 @@ export class HeaderComponent implements OnInit {
   // Variable to hold the user data
 
   ngOnInit(): void {
+
+    const user = localStorage.getItem('user');
+    const userId = user ? JSON.parse(user).id : null;
+
     // Subscribe to user data changes
     this.userProfileService.user$.subscribe(user => {
       this.user = user; // Automatically get updated user data
     });
+
+    if (userId) {
+      // Register user to receive notifications
+      this.notificationService.registerUser(userId);
+      // Fetch initial notifications
+      this.notificationService.fetchNotifications();
+    }
+
+    // Subscribe to the notifications
+    this.notificationService.notifications$.subscribe((notifications) => {
+      this.notifications = notifications;
+      console.log(this.notifications)
+    });
+
+
+  }
+
+
+  toggleDropdown(): void {
+    this.dropdownOpen = !this.dropdownOpen;
+  }
+
+  markAsRead(notificationId: number): void {
+    // Implement logic for marking the notification as read, if necessary
+    console.log(`Marking notification with ID: ${notificationId} as read`);
   }
 
   onSignOut() {
