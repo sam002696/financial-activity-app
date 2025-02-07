@@ -35,4 +35,15 @@ export class PaginationComponent {
     isNextDisabled(): boolean {
         return this.meta.currentPage === this.meta.totalPages;
     }
+
+    // Calculate the start index for the current page
+    getStartIndex(): number {
+        return (this.meta.currentPage - 1) * this.meta.size + 1;
+    }
+
+    // Calculate the end index for the current page
+    getEndIndex(): number {
+        const end = this.meta.currentPage * this.meta.size;
+        return end > this.meta.total ? this.meta.total : end;
+    }
 }
