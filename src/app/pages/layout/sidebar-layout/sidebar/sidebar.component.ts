@@ -27,5 +27,10 @@ export class SidebarComponent {
     this.isSubMenuLoanOpen = !this.isSubMenuLoanOpen;
   }
 
+  onSignOut() {
+    localStorage.removeItem('user');
+    this.router.navigate(['/login'])
+  }
+
 
 }

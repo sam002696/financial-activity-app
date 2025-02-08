@@ -6,10 +6,11 @@ import { UserAuthService } from '../../services/user-auth.service';
 import { GlobalAlertService } from '../../services/global-alert.service';
 import { IApiResponse } from '../../model/apiresponse/apiresponse';
 import { UserProfileService } from '../../services/user-profile.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, RouterLink],
+  imports: [FormsModule, RouterLink, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })

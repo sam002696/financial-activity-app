@@ -3,7 +3,7 @@
     <div class="sm:flex-auto">
       <h1 class="text-base font-semibold text-gray-900">Expense List</h1>
       <p class="mt-2 text-sm text-gray-700">
-        A list of all the income records including their category, amount, and
+        A list of all the expense records including their category, amount, and
         date.
       </p>
     </div>
@@ -13,7 +13,7 @@
         type="button"
         class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
       >
-        Add Expense
+        Log Expense
       </button>
     </div>
   </div>
@@ -66,18 +66,18 @@
                   <a
                     [routerLink]="['/expense/edit', expense.id]"
                     routerLinkActive="router-link-active"
-                    class="text-indigo-600 hover:text-indigo-900"
+                    class="text-indigo-600 hover:text-indigo-900 rounded-md bg-indigo-200 p-2 whitespace-nowrap cursor-pointer"
                     >Edit</a
                   >
                   <button
                     (click)="onViewContract(expense.id)"
-                    class="text-yellow-600 hover:text-yellow-900 ml-3"
+                    class="text-yellow-600 hover:text-yellow-900 ml-3 rounded-md bg-yellow-200 p-2 whitespace-nowrap cursor-pointer"
                   >
                     View Contract
                   </button>
                   <button
                     (click)="onDelete(expense.id)"
-                    class="text-red-600 hover:text-red-900 ml-3"
+                    class="text-red-600 hover:text-red-900 ml-3 rounded-md bg-red-200 p-2 whitespace-nowrap cursor-pointer"
                   >
                     Delete
                   </button>

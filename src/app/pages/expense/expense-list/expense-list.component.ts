@@ -6,6 +6,7 @@ import { ExpenseService } from '../../../services/expense.service';
 import { IApiResponse } from '../../../model/apiresponse/apiresponse';
 import { PaginationComponent } from "../../pagination/pagination.component";
 import { ExpenseModalComponent } from "../../modal/expense-modal/expense-modal.component";
+import { GlobalAlertService } from '../../../services/global-alert.service';
 
 @Component({
   selector: 'app-expense-list',
@@ -18,6 +19,8 @@ export class ExpenseListComponent implements OnInit {
   selectedExpenseId: number | null = null;
 
   constructor(private router: Router) { }
+
+  globalAlertService = inject(GlobalAlertService)
 
   expenseList: GetExpense[] = []
 
@@ -57,11 +60,11 @@ export class ExpenseListComponent implements OnInit {
     if (confirm('Are you sure you want to delete this expense record?')) {
       this.expenseService.deleteExpense(id).subscribe((res: IApiResponse) => {
         if (res.status === 'success') {
-          alert(res.message);
+          this.globalAlertService.showAlert(res.message, 'success');
           this.expenseList = this.expenseList.filter(expense => expense.id !== id);
-        } else {
-          alert('Error deleting expense');
         }
+      }, error => {
+        this.globalAlertService.showAlert(error.error.message, 'error');
       });
     }
   }

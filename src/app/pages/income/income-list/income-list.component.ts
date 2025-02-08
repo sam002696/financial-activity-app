@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { PaginationComponent } from "../../pagination/pagination.component";
 import { IncomeModalComponent } from "../../modal/income-modal/income-modal.component";
+import { GlobalAlertService } from '../../../services/global-alert.service';
 
 @Component({
   selector: 'app-income-list',
@@ -24,6 +25,7 @@ export class IncomeListComponent implements OnInit {
   incomeList: GetIncome[] = []
 
   incomeService = inject(IncomeService);
+  globalAlertService = inject(GlobalAlertService)
 
   ngOnInit(): void {
     this.loadIncomes(1, 10);  // Default to page 1 and size 10 items per page
@@ -57,11 +59,11 @@ export class IncomeListComponent implements OnInit {
     if (confirm('Are you sure you want to delete this income record?')) {
       this.incomeService.deleteIncome(id).subscribe((res: IApiResponseIncome) => {
         if (res.status === 'success') {
-          alert(res.message);
+          this.globalAlertService.showAlert(res.message, 'success');
           this.incomeList = this.incomeList.filter(income => income.id !== id);
-        } else {
-          alert('Error deleting income');
         }
+      }, error => {
+        this.globalAlertService.showAlert(error.error.message, 'error');
       });
     }
   }

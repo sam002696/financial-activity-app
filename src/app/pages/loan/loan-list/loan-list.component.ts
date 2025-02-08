@@ -6,6 +6,7 @@ import { IApiResponse } from '../../../model/apiresponse/apiresponse';
 import { PaginationComponent } from "../../pagination/pagination.component";
 import { CommonModule } from '@angular/common';
 import { LoanModalComponent } from "../../modal/loan-modal/loan-modal.component";
+import { GlobalAlertService } from '../../../services/global-alert.service';
 
 @Component({
   selector: 'app-loan-list',
@@ -23,6 +24,7 @@ export class LoanListComponent implements OnInit {
   loanService = inject(LoanService);
 
   constructor(private router: Router) { }
+  globalAlertService = inject(GlobalAlertService)
 
   ngOnInit(): void {
     this.loadLoans(1, 10);  // Default to page 1 and size 10 items per page
@@ -55,11 +57,11 @@ export class LoanListComponent implements OnInit {
     if (confirm('Are you sure you want to delete this loan record?')) {
       this.loanService.deleteLoan(id).subscribe((res: IApiResponse) => {
         if (res.status === 'success') {
-          alert(res.message);
+          this.globalAlertService.showAlert(res.message, 'success');
           this.loanList = this.loanList.filter(loan => loan.id !== id);
-        } else {
-          alert('Error deleting loan');
         }
+      }, error => {
+        this.globalAlertService.showAlert(error.error.message, 'error');
       });
     }
   }
@@ -70,11 +72,11 @@ export class LoanListComponent implements OnInit {
     if (confirmRepayment) {
       this.loanService.repayLoan(loanId, amount).subscribe((res: IApiResponse) => {
         if (res.status === 'success') {
-          alert(res.message);
+          this.globalAlertService.showAlert(res.message, 'success');
           this.loadLoans(this.meta.currentPage, this.meta.size);  // Refresh the loan list after repayment
-        } else {
-          alert(res.message);
         }
+      }, error => {
+        this.globalAlertService.showAlert(error.error.message, 'error');
       });
     }
   }

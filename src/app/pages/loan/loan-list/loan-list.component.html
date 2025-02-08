@@ -13,7 +13,7 @@
         type="button"
         class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
       >
-        Add loan
+        Log loan
       </button>
     </div>
   </div>
@@ -85,25 +85,25 @@
                   <a
                     [routerLink]="['/loan/edit', loan.id]"
                     routerLinkActive="router-link-active"
-                    class="text-indigo-600 hover:text-indigo-900"
+                    class="text-indigo-600 hover:text-indigo-900 rounded-md bg-indigo-200 p-2 whitespace-nowrap cursor-pointer"
                     >Edit</a
                   >
                   <button
                     (click)="onViewContract(loan.id)"
-                    class="text-yellow-600 hover:text-yellow-900 ml-3"
+                    class="text-yellow-600 hover:text-yellow-900 ml-3 rounded-md bg-yellow-200 p-2 whitespace-nowrap cursor-pointer"
                   >
                     View Contract
                   </button>
 
                   <button
                     (click)="onRepay(loan.id, loan.amount)"
-                    class="text-green-600 hover:text-green-900 ml-3 cursor-pointer"
+                    class="text-green-600 hover:text-green-900 ml-3 cursor-pointer rounded-md bg-green-200 p-2 whitespace-nowrap"
                   >
                     Repay Loan
                   </button>
                   <button
                     (click)="onDelete(loan.id)"
-                    class="text-red-600 hover:text-red-900 ml-3 cursor-pointer"
+                    class="text-red-600 hover:text-red-900 ml-3 cursor-pointer rounded-md bg-red-200 p-2 whitespace-nowrap"
                   >
                     Delete
                   </button>

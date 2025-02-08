@@ -6,10 +6,11 @@ import { UserAuthService } from '../../services/user-auth.service';
 import { IApiResponse } from '../../model/apiresponse/apiresponse';
 import { GlobalAlertService } from '../../services/global-alert.service';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-signup',
-  imports: [FormsModule, RouterLink],
+  imports: [FormsModule, RouterLink, CommonModule],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css'
 })

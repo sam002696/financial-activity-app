@@ -29,7 +29,7 @@ export class LoanModalComponent {
 
   // Fetch contract data for the selected expense
   fetchContractData(loanId: number) {
-    this.contractService.getSingleExpenseContract(loanId).subscribe(response => {
+    this.contractService.getSingleLoanContract(loanId).subscribe(response => {
       if (response.status === 'success') {
         this.contractData = response.data; // Set the contract data
         this.visible = true; // Show the modal
