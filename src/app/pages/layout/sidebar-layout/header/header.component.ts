@@ -6,6 +6,7 @@ import { RouterLink } from '@angular/router';
 import { Notification } from '../../../../model/user/notfication';
 import { UserNotificationService } from '../../../../services/user-notification.service';
 import { UserAuthService } from '../../../../services/user-auth.service';
+import { SidebarService } from '../../../../services/sidebar.service';
 
 @Component({
   selector: 'app-header',
@@ -20,11 +21,16 @@ export class HeaderComponent implements OnInit {
 
   constructor(private userProfileService: UserProfileService,
     private notificationService: UserNotificationService,
-    private authService: UserAuthService
+    private authService: UserAuthService,
+    private sidebarService: SidebarService
   ) { }
 
   user: User | null = null;
   isUserMenuOpen: boolean = false;
+
+  openSidebar() {
+    this.sidebarService.openSidebar(); // Open the sidebar
+  }
 
   toggleUserMenu(): void {
     this.isUserMenuOpen = !this.isUserMenuOpen;
