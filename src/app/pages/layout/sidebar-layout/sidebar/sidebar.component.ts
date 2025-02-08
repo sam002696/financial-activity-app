@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { UserAuthService } from '../../../../services/user-auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,7 +10,9 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './sidebar.component.css'
 })
 export class SidebarComponent {
-  constructor(private router: Router) { }
+  constructor(
+    private authService: UserAuthService
+  ) { }
 
   isSubMenuOpen: boolean = true;
   isSubMenuExpenseOpen: boolean = true;
@@ -28,8 +31,7 @@ export class SidebarComponent {
   }
 
   onSignOut() {
-    localStorage.removeItem('user');
-    this.router.navigate(['/login'])
+    this.authService.signOut()
   }
 
 

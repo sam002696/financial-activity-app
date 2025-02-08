@@ -31,7 +31,7 @@
           <button
             (click)="toggleDropdown()"
             type="button"
-            class="w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 shadow-xs ring-gray-300 ring-inset hover:bg-gray-50 flex items-center"
+            class="w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 shadow-xs ring-gray-300 ring-inset hover:bg-gray-50 flex items-center cursor-pointer"
             id="menu-button"
             aria-expanded="true"
             aria-haspopup="true"
@@ -82,7 +82,10 @@
           tabindex="-1"
         >
           <div class="" role="none">
-            <div *ngIf="notifications.length === 0" class="text-gray-500">
+            <div
+              *ngIf="notifications.length === 0"
+              class="text-gray-500 p-3 text-sm"
+            >
               No notifications
             </div>
             <div *ngIf="notifications.length > 0">
@@ -147,7 +150,7 @@
           </span>
           <span class="hidden lg:flex lg:items-center">
             <span
-              class="ml-4 text-sm/6 font-semibold text-gray-900"
+              class="ml-4 text-sm/6 font-semibold text-gray-900 cursor-pointer"
               aria-hidden="true"
               >{{ user?.username }}</span
             >

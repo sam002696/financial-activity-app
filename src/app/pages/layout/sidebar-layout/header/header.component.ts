@@ -2,9 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../../../model/user/user';
 import { UserProfileService } from '../../../../services/user-profile.service';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { Notification } from '../../../../model/user/notfication';
 import { UserNotificationService } from '../../../../services/user-notification.service';
+import { UserAuthService } from '../../../../services/user-auth.service';
 
 @Component({
   selector: 'app-header',
@@ -18,8 +19,8 @@ export class HeaderComponent implements OnInit {
   dropdownOpen = false;
 
   constructor(private userProfileService: UserProfileService,
-    private router: Router,
-    private notificationService: UserNotificationService
+    private notificationService: UserNotificationService,
+    private authService: UserAuthService
   ) { }
 
   user: User | null = null;
@@ -68,8 +69,7 @@ export class HeaderComponent implements OnInit {
   }
 
   onSignOut() {
-    localStorage.removeItem('user');
-    this.router.navigate(['/login'])
+    this.authService.signOut()
   }
 
 }

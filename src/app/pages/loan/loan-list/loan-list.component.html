@@ -61,7 +61,10 @@
                 </th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-gray-200 bg-white">
+            <tbody
+              class="divide-y divide-gray-200 bg-white"
+              *ngIf="loanList.length > 0; else noData"
+            >
               <tr *ngFor="let loan of loanList">
                 <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500">
                   {{ loan.amount }}
@@ -111,6 +114,16 @@
               </tr>
             </tbody>
           </table>
+
+          <!-- No data found message -->
+          <ng-template #noData>
+            <td
+              colspan="5"
+              class="text-center py-4 text-indigo-500 font-semibold"
+            >
+              No data found
+            </td>
+          </ng-template>
         </div>
       </div>
     </div>
@@ -118,6 +131,7 @@
 
   <!-- Pagination Component -->
   <app-pagination
+    *ngIf="loanList.length > 0"
     [meta]="meta"
     (pageChanged)="onPageChange($event)"
   ></app-pagination>

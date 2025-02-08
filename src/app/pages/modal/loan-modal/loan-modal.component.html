@@ -57,13 +57,13 @@
             <p class="text-base text-gray-500">
               <strong>Due Date:</strong> {{ contractData.dueDate | date }}
             </p>
-            <p class="text-base text-gray-500">
+            <!-- <p class="text-base text-gray-500">
               <strong>Paid Amount:</strong> {{ contractData.paidAmount }}
             </p>
             <p class="text-base text-gray-500">
               <strong>Remaining Amount:</strong>
               {{ contractData.remainingAmount }}
-            </p>
+            </p> -->
           </div>
           <div *ngIf="!contractData" class="text-sm text-gray-500">
             <p>Loading contract data...</p>

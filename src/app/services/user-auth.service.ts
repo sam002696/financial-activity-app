@@ -5,13 +5,18 @@ import { Signup } from '../model/user/signup';
 import { Observable } from 'rxjs';
 import { IApiResponse } from '../model/apiresponse/apiresponse';
 import { Login } from '../model/user/login';
+import { Router } from '@angular/router';
+import { UserNotificationService } from './user-notification.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserAuthService {
 
-  constructor(private http: HttpClient, private urlBuilder: UrlBuilderService) { }
+  constructor(private http: HttpClient, private urlBuilder: UrlBuilderService,
+    private router: Router,
+    private notificationService: UserNotificationService,
+  ) { }
 
   signup(obj: Signup): Observable<IApiResponse> {
     const url = this.urlBuilder.buildUrl('auth/register');
@@ -32,6 +37,11 @@ export class UserAuthService {
     return !!token;  // Returns true if token exists
   }
 
+  signOut() {
+    localStorage.removeItem('user');
+    this.notificationService.clearNotifications();
+    this.router.navigate(['/login'])
+  }
 
 
 }

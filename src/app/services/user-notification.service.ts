@@ -56,4 +56,8 @@ export class UserNotificationService {
 
     console.log(`Marking notification with ID: ${notificationId} as read`);
   }
+
+  clearNotifications() {
+    this.notificationsSource.next([]); // Set the notifications list to an empty array
+  }
 }
