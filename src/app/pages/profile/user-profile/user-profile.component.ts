@@ -13,7 +13,7 @@ import { GlobalAlertService } from '../../../services/global-alert.service';
   styleUrl: './user-profile.component.css'
 })
 export class UserProfileComponent implements OnInit {
-  // This will hold the data for the form
+  // holding the data for the form
   userInfo: UpdateUserProfile = new UpdateUserProfile();
 
   constructor(

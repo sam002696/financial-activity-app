@@ -29,10 +29,10 @@ export class EditIncomeComponent implements OnInit {
     const incomeId = Number(this.route.snapshot.paramMap.get('id'));
 
     if (incomeId) {
-      // Fetch the income details from the API
+      // Fetching the income details from the API
       this.incomeService.getSingleIncome(incomeId).subscribe((res: IApiResponseIncome) => {
         if (res.status === 'success') {
-          this.addIncome = res.data; // Bind the data to the form fields
+          this.addIncome = res.data; // Binding the data to the form fields
         }
       });
     }

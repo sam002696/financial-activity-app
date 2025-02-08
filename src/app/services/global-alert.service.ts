@@ -5,9 +5,9 @@ import { BehaviorSubject } from 'rxjs';
     providedIn: 'root',
 })
 export class GlobalAlertService {
-    private messageSource = new BehaviorSubject<string>(''); // Default empty message
-    private statusSource = new BehaviorSubject<'success' | 'error' | null>(null); // Default to null
-    private visibleSource = new BehaviorSubject<boolean>(false); // Default to hidden
+    private messageSource = new BehaviorSubject<string>('');
+    private statusSource = new BehaviorSubject<'success' | 'error' | null>(null);
+    private visibleSource = new BehaviorSubject<boolean>(false);
 
     // Observable for message
     message$ = this.messageSource.asObservable();
@@ -16,14 +16,14 @@ export class GlobalAlertService {
     // Observable for visibility
     visible$ = this.visibleSource.asObservable();
 
-    // Set the alert message, status and visibility
+    // Setting the alert message, status and visibility
     showAlert(message: string, status: 'success' | 'error') {
         this.messageSource.next(message);
         this.statusSource.next(status);
         this.visibleSource.next(true);
     }
 
-    // Hide the alert
+    // Hiding the alert
     hideAlert() {
         this.visibleSource.next(false);
     }

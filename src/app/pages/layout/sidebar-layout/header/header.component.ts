@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit {
   isUserMenuOpen: boolean = false;
 
   openSidebar() {
-    this.sidebarService.openSidebar(); // Open the sidebar
+    this.sidebarService.openSidebar(); // Opening the sidebar
   }
 
   toggleUserMenu(): void {
@@ -43,19 +43,19 @@ export class HeaderComponent implements OnInit {
     const user = localStorage.getItem('user');
     const userId = user ? JSON.parse(user).id : null;
 
-    // Subscribe to user data changes
+    // Subscribing to user data changes
     this.userProfileService.user$.subscribe(user => {
       this.user = user; // Automatically get updated user data
     });
 
     if (userId) {
-      // Register user to receive notifications
+      // Registering user to receive notifications
       this.notificationService.registerUser(userId);
-      // Fetch initial notifications
+      // Fetching initial notifications
       this.notificationService.fetchNotifications();
     }
 
-    // Subscribe to the notifications
+    // Subscribing to the notifications
     this.notificationService.notifications$.subscribe((notifications) => {
       this.notifications = notifications;
       console.log(this.notifications)
@@ -70,7 +70,7 @@ export class HeaderComponent implements OnInit {
   }
 
   markAsRead(notificationId: number): void {
-    // Implement logic for marking the notification as read, if necessary
+    // this logic has not yet been implemented
     console.log(`Marking notification with ID: ${notificationId} as read`);
   }
 

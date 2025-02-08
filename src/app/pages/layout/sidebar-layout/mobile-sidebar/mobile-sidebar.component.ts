@@ -25,7 +25,7 @@ export class MobileSidebarComponent {
   isSidebarOpen: boolean = false;
 
   ngOnInit(): void {
-    // Subscribe to the sidebar open/close state
+    // Subscribing to the sidebar open/close state
     this.sidebarService.isSidebarOpen$.subscribe(
       (isOpen) => (this.isSidebarOpen = isOpen)
     );

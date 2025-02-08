@@ -17,12 +17,12 @@ export class CustomAlertComponent implements OnInit, OnDestroy {
   constructor(private globalAlertService: GlobalAlertService) { }
 
   ngOnInit(): void {
-    // Subscribe to the alert state from the service
+    // Subscribing to the alert state from the service
     this.globalAlertService.message$.subscribe(message => this.message = message);
     this.globalAlertService.status$.subscribe(status => this.status = status);
     this.globalAlertService.visible$.subscribe(visible => {
       this.visible = visible;
-      // Automatically hide the alert after 5 seconds when it becomes visible
+      // Automatically hiding the alert after 5 seconds when it becomes visible
       if (visible) {
         this.startAlertTimeout();
       }
@@ -30,24 +30,24 @@ export class CustomAlertComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // Clear timeout when component is destroyed to avoid any memory leaks
+    // Clearing timeout when component is destroyed to avoid any memory leaks
     if (this.alertTimeout) {
       clearTimeout(this.alertTimeout);
     }
   }
 
-  // Start the timeout to hide the alert after 5 seconds
+
   private startAlertTimeout() {
     this.alertTimeout = setTimeout(() => {
-      this.closeAlert(); // Close the alert automatically after 5 seconds
+      this.closeAlert(); // Closing the alert automatically after 5 seconds
     }, 5000);
   }
 
-  // Close the alert
+  // Closing the alert
   closeAlert() {
-    this.globalAlertService.hideAlert(); // Hide the alert when closed
+    this.globalAlertService.hideAlert(); // Hiding the alert when closed
     if (this.alertTimeout) {
-      clearTimeout(this.alertTimeout); // Clear timeout if the alert is manually closed
+      clearTimeout(this.alertTimeout); // Clearing timeout if the alert is manually closed
     }
   }
 }

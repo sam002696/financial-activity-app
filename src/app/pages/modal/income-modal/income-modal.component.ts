@@ -20,7 +20,7 @@ export class IncomeModalComponent {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['incomeId'] && this.incomeId) {
-      this.fetchContractData(this.incomeId); // Fetch data when incomeId changes
+      this.fetchContractData(this.incomeId); // Fetching data when incomeId changes
     }
   }
 
@@ -28,15 +28,15 @@ export class IncomeModalComponent {
   fetchContractData(incomeId: number) {
     this.contractService.getSingleIncomeContract(incomeId).subscribe(response => {
       if (response.status === 'success') {
-        this.contractData = response.data; // Set the contract data
-        this.visible = true; // Show the modal
+        this.contractData = response.data; // Setting the contract data
+        this.visible = true; // Showing the modal
       }
     });
   }
 
-  // Close the modal
+  // Closing the modal
   close() {
     this.visible = false;
-    this.closeModal.emit();  // Emit event to close modal in the parent component
+    this.closeModal.emit();  // Emitting event to close modal in the parent component
   }
 }

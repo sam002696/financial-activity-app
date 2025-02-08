@@ -3,17 +3,14 @@ import { catchError, Observable, throwError } from 'rxjs';
 import { GlobalAlertService } from '../services/global-alert.service';
 import { Router } from '@angular/router';
 
-// Function-based interceptor using HttpHandlerFn
+
 export const AuthInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: HttpHandlerFn): Observable<HttpEvent<any>> => {
 
 
-
-    // Getting the access token from localStorage
     const user = localStorage.getItem('user');
     const token = user ? JSON.parse(user).accessToken : null;
 
-    // console.log('user', user);
-    // console.log('token', token);
+
 
     if (req.url.includes('/login') || req.url.includes('/register')) {
 

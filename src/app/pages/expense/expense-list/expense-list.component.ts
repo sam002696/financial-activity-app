@@ -29,7 +29,7 @@ export class ExpenseListComponent implements OnInit {
   expenseService = inject(ExpenseService);
 
   ngOnInit(): void {
-    this.loadExpenses(1, 10);  // Default to page 1 and size 10 items per page
+    this.loadExpenses(1, 10);  // Defaulting to page 1 and size 10 items per page
   }
 
   // Load loans with pagination
@@ -38,7 +38,7 @@ export class ExpenseListComponent implements OnInit {
       if (res.status === 'success') {
         this.expenseList = res.data;
         this.meta = res.meta;
-        // Calculate total pages if not provided by API
+        // Calculating total pages 
         if (this.meta.total && this.meta.size) {
           this.meta.totalPages = Math.ceil(this.meta.total / this.meta.size);
         }
@@ -47,7 +47,7 @@ export class ExpenseListComponent implements OnInit {
   }
 
 
-  // Handle page change from pagination component
+  // Handling page change from pagination component
   onPageChange(page: number): void {
 
     if (page > 0 && page <= this.meta.totalPages) {

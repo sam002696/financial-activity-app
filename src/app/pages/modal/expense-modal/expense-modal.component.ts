@@ -23,16 +23,16 @@ export class ExpenseModalComponent {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['expenseId'] && this.expenseId) {
-      this.fetchContractData(this.expenseId); // Fetch data when expenseId changes
+      this.fetchContractData(this.expenseId); // Fetching data when expenseId changes
     }
   }
 
-  // Fetch contract data for the selected expense
+  // Fetching contract data for the selected expense
   fetchContractData(expenseId: number) {
     this.contractService.getSingleExpenseContract(expenseId).subscribe(response => {
       if (response.status === 'success') {
-        this.contractData = response.data; // Set the contract data
-        this.visible = true; // Show the modal
+        this.contractData = response.data; // Setting the contract data
+        this.visible = true; // Showing the modal
       }
     }, error => {
       this.contractData = null;
@@ -44,6 +44,6 @@ export class ExpenseModalComponent {
   close() {
     this.visible = false;
     this.contractData = null;
-    this.closeModal.emit();  // Emit event to close modal in the parent component
+    this.closeModal.emit();  // Emitting event to close modal in the parent component
   }
 }

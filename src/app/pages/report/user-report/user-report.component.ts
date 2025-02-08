@@ -13,12 +13,12 @@ export class UserReportComponent {
 
   constructor(private reportService: UserReportService) { }
 
-  // Trigger Income and Expense Report download
+  // Triggering Income and Expense Report download
   downloadIncomeExpenseReport(): void {
     this.reportService.downloadIncomeExpenseReport().subscribe(
       (response: Blob) => {
         const fileName = 'Income_Expense_Report.pdf';
-        saveAs(response, fileName); // Trigger download
+        saveAs(response, fileName);
       },
       error => {
         console.error('Error downloading the Income and Expense Report', error);
@@ -31,7 +31,7 @@ export class UserReportComponent {
     this.reportService.downloadLoanStatusReport().subscribe(
       (response: Blob) => {
         const fileName = 'Loan_Status_Report.pdf';
-        saveAs(response, fileName); // Trigger download
+        saveAs(response, fileName);
       },
       error => {
         console.error('Error downloading the Loan Status Report', error);

@@ -20,37 +20,39 @@ export class UserProfileService {
     return user ? JSON.parse(user) : null;
   }
 
-  // Update the user profile and sync with localStorage
+  // Updating the user profile and sync with localStorage
   updateUserProfileInfo(obj: UpdateUserProfile): Observable<IApiResponse> {
     const url = this.urlBuilder.buildUrl('users/profile-update');
     return this.http.put<IApiResponse>(url, obj).pipe(
-      // After the user profile is updated successfully
+
       tap((res: IApiResponse) => {
         if (res.status === 'success') {
-          // Update the localStorage with the new profile data
+
           const updatedUser = {
             ...this.getUserFromLocalStorage(),
-            username: obj.name,  // Update the name in localStorage
-            email: obj.email,     // Update the email in localStorage
-            balance: obj.balance  // Update the balance in localStorage
+            username: obj.name,
+            email: obj.email,
+            balance: obj.balance
           };
 
-          // Save the updated user to localStorage
+          // Saving the updated user to localStorage
           localStorage.setItem('user', JSON.stringify(updatedUser));
 
-          // Emit the updated user data
+          // Emitting the updated user data
           this.userSubject.next(updatedUser);
         }
       })
     );
   }
 
-  // Fetch user profile information
+  // Fetching user profile information
   getUserProfileInfo(): Observable<IApiResponse> {
     const url = this.urlBuilder.buildUrl('users/profile-info');
     return this.http.get<IApiResponse>(url);
   }
 
+  // when users logs in 
+  // setting the user
   setUser(user: any) {
     this.userSubject.next(user); // Update the current user data
   }

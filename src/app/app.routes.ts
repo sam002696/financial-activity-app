@@ -43,6 +43,7 @@ export const routes: Routes = [
                 component: DashboardComponent,
                 canActivate: [AuthGuard]
             },
+            // nested routes
             {
                 path: 'income',
                 component: IncomeLayoutComponent,

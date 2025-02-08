@@ -19,7 +19,7 @@ export class LoanListComponent implements OnInit {
 
   loanList: GetLoan[] = [];
 
-  meta: any = {};  // Store pagination metadata
+  meta: any = {};  // Storing pagination metadata here
 
   loanService = inject(LoanService);
 
@@ -27,7 +27,7 @@ export class LoanListComponent implements OnInit {
   globalAlertService = inject(GlobalAlertService)
 
   ngOnInit(): void {
-    this.loadLoans(1, 10);  // Default to page 1 and size 10 items per page
+    this.loadLoans(1, 10);  // Defaulting to page 1 and size 10 items per page
   }
 
   // Load loans with pagination
@@ -36,7 +36,7 @@ export class LoanListComponent implements OnInit {
       if (res.status === 'success') {
         this.loanList = res.data;
         this.meta = res.meta;
-        // Calculate total pages if not provided by API
+
         if (this.meta.total && this.meta.size) {
           this.meta.totalPages = Math.ceil(this.meta.total / this.meta.size);
         }
@@ -44,11 +44,11 @@ export class LoanListComponent implements OnInit {
     });
   }
 
-  // Handle page change from pagination component
+  // Handling page change from pagination component
   onPageChange(page: number): void {
-    // Don't call loadLoans if the page is out of bounds (e.g., before page 1 or after totalPages)
+
     if (page > 0 && page <= this.meta.totalPages) {
-      this.loadLoans(page, this.meta.size);  // Fetch the loans for the selected page
+      this.loadLoans(page, this.meta.size);  // Fetching the loans for the selected page
     }
   }
 

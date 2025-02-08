@@ -30,8 +30,7 @@ export class UserAuthService {
   }
 
   isAuthenticated(): boolean {
-    // Logic to check if the user is authenticated (e.g., check token in localStorage)
-    // accessToken
+    // Logic to check if the user is authenticated based on access token
     const user = localStorage.getItem('user');
     const token = user ? JSON.parse(user).accessToken : null;
     return !!token;  // Returns true if token exists

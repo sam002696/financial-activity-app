@@ -14,7 +14,7 @@ import { GlobalAlertService } from '../../../services/global-alert.service';
   styleUrl: './edit-expense.component.css'
 })
 export class EditExpenseComponent implements OnInit {
-  // This will hold the data for the form
+  // This is to hold the data for the form
   addExpense: addExpense = new addExpense();
 
   constructor(

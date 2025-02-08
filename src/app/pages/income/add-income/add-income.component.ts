@@ -17,7 +17,7 @@ export class AddIncomeComponent {
   constructor(
     private router: Router,
     private incomeService: IncomeService,
-    private globalAlertService: GlobalAlertService // Inject the global alert service
+    private globalAlertService: GlobalAlertService // Injecting the global alert service
   ) { }
 
   // Model for the form

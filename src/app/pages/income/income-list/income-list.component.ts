@@ -28,16 +28,16 @@ export class IncomeListComponent implements OnInit {
   globalAlertService = inject(GlobalAlertService)
 
   ngOnInit(): void {
-    this.loadIncomes(1, 10);  // Default to page 1 and size 10 items per page
+    this.loadIncomes(1, 10);  // Defaulting to page 1 and size 10 items per page
   }
 
-  // Load loans with pagination
+  // Load incomes with pagination
   loadIncomes(page: number, size: number): void {
     this.incomeService.getIncomeList(page, size).subscribe((res: IApiResponseIncome) => {
       if (res.status === 'success') {
         this.incomeList = res.data;
         this.meta = res.meta;
-        // Calculate total pages if not provided by API
+        // Calculating total pages 
         if (this.meta.total && this.meta.size) {
           this.meta.totalPages = Math.ceil(this.meta.total / this.meta.size);
         }
@@ -45,11 +45,11 @@ export class IncomeListComponent implements OnInit {
     });
   }
 
-  // Handle page change from pagination component
+  // Handling page change from pagination component
   onPageChange(page: number): void {
-    // Don't call loadLoans if the page is out of bounds (e.g., before page 1 or after totalPages)
+
     if (page > 0 && page <= this.meta.totalPages) {
-      this.loadIncomes(page, this.meta.size);  // Fetch the loans for the selected page
+      this.loadIncomes(page, this.meta.size);  // Fetching the loans for the selected page
     }
   }
 
@@ -80,7 +80,7 @@ export class IncomeListComponent implements OnInit {
     this.router.navigate(['/income/log']);
   }
 
-  // Close the modal
+  // Closing the modal
   closeModal() {
     this.selectedIncomeId = null;
   }

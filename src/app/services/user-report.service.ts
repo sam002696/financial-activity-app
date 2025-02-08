@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IApiResponse } from '../model/apiresponse/apiresponse';
 import { UrlBuilderService } from './url-builder.service';
 
 @Injectable({
@@ -17,12 +16,12 @@ export class UserReportService {
     return this.http.get(url, { responseType: 'blob' });
   }
 
-  // Download Income and Expense Report
+  // Downloading Income and Expense Report
   downloadIncomeExpenseReport(): Observable<Blob> {
     return this.downloadReport('reports/income-expense');
   }
 
-  // Download Loan Status Report
+  // Downloading Loan Status Report
   downloadLoanStatusReport(): Observable<Blob> {
     return this.downloadReport('reports/loan-status');
   }
